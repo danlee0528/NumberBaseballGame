@@ -12,6 +12,7 @@
 #include <cstdlib>
 #include <string>
 #include <time.h>
+#include "UI.h"
 
 using namespace std;
 
@@ -20,7 +21,6 @@ const static int MAX_NUM_DIGIT = 10;
 
 // Function Declarations
 void display_number_of_(int[], int);
-void display_menu();
 bool check_input(string, int);
 void display_condition_of_(int[], int[], int, int); // user[], com[], max_size, round
 bool is_num_found(int[], int[], int); // user[], com[], max_size
@@ -28,7 +28,7 @@ bool start_new_game(char);
 void bring_the_game(int, int); // level, max_number_of_round
 
 void main() {
-
+	UI ui;
 	int user_level = 0;
 	int max_round = 10;
 	char user_more_game;
@@ -37,13 +37,12 @@ void main() {
 
 	do {
 
-		display_menu();
+		ui.display_menu();
 		cout << "\t>>";
 		cin >> user_level;
 
 		while (user_level != 1 && user_level != 2 && user_level != 3) {
-			cout << "\t  [" << "!" << "] " << "Invalid input was entered!" << endl;
-			cout << "\t  please enter again : ";
+			ui.display_error_message();
 			cin >> user_level;
 		}
 
@@ -75,7 +74,7 @@ void main() {
 } // closure of main()
 
 void bring_the_game(int user_custom_num_round, int MAX_ROUND) {
-
+	UI ui;
 	int nums[MAX_NUM_DIGIT] = { 0,1,2,3,4,5,6,7,8,9 };
 	int round = 0;
 	int temp_value;
@@ -118,8 +117,7 @@ void bring_the_game(int user_custom_num_round, int MAX_ROUND) {
 
 		while (!check_input(response, MAX_SIZE)) {
 			cout << endl;
-			cout << "\t  [" << "!" << "] " << "Invalid input was entered!" << endl;
-			cout << "\t  please enter again : ";
+			ui.display_error_message();
 			cin >> response;
 		}
 
@@ -135,9 +133,7 @@ void bring_the_game(int user_custom_num_round, int MAX_ROUND) {
 
 		// check if user guessed all digits before reaching to max num of rounds
 		if (is_num_found(user_num, computer_num, MAX_SIZE)) {
-			cout << "\t######################################" << endl;
-			cout << "\t##       YES!  YOU ARE CORRECT!     ##" << endl;
-			cout << "\t######################################" << endl;
+			ui.display_victory_message();
 			user_won = true;
 			break;
 		}
@@ -151,20 +147,6 @@ void bring_the_game(int user_custom_num_round, int MAX_ROUND) {
 		cout << "]   ##" << endl;
 		cout << "\t######################################" << endl;
 	}
-	cout << endl;
-}
-
-void display_menu() {
-	cout << endl;
-	cout << "\t######################################" << endl;
-	cout << "\t#  WECLOME TO NUMBER BASEBALL GAME!  #" << endl;
-	cout << "\t######################################" << endl;
-	cout << "\t#      PLEASE SELECT AN OPTION       #" << endl;
-	cout << "\t######################################" << endl;
-	cout << "\t#           1. BEGINNER              #" << endl;
-	cout << "\t#           2. INTERMEDIATE          #" << endl;
-	cout << "\t#           3. PRO                   #" << endl;
-	cout << "\t######################################" << endl;
 	cout << endl;
 }
 
