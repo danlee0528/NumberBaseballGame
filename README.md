@@ -17,3 +17,6 @@ Supposed computer chose a number, 1234, and player takes his/her first guess as 
 1. The condition to be given is [ 1S 2B 1O ]. 
 2. Because 134 are in the computer's number and the location of 3 matches with the user's guess. 
  - 1 Out results from 5 not being in the computer's number.
+
+# Demo
+<img src = "/nbg.JPG" width="500px">
